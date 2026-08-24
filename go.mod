@@ -1,6 +1,6 @@
-module github.com/netbox-community/go-netbox/v4
+module github.com/opsathome/go-netbox
 
-go 1.23
+go 1.27
 
 require (
 	github.com/stretchr/testify v1.12.1
