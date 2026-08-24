@@ -18,13 +18,22 @@ git clone https://github.com/netbox-community/netbox-docker.git \
 
 mv "${REPO_DIR}/docker-compose.override.yml.example" "${REPO_DIR}/docker-compose.override.yml"
 
+WORKDIR=$(pwd)
+
 export VERSION="v${NETBOX_VERSION}"
-docker compose --project-directory="${REPO_DIR}" up --detach --quiet-pull
+#docker compose --project-directory="${REPO_DIR}" up --detach --quiet-pull
+cd ${REPO_DIR}
+podman compose up -d
+
+cd ${WORKDIR}
 
 while ! curl --silent http://localhost:8000/api/schema/ > api/openapi.yaml 2> /dev/null; do
   sleep 1
 done
 
-docker compose --project-directory="${REPO_DIR}" down --volumes
+cd ${REPO_DIR}
+podman compose down
+cd ${WORKDIR}
+#docker compose --project-directory="${REPO_DIR}" down --volumes
 
 rm -rf "${REPO_DIR}"
