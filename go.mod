@@ -1,4 +1,4 @@
-module github.com/opsathome/go-netbox
+module github.com/opsathome/go-netbox/v4
 
 go 1.27
 
